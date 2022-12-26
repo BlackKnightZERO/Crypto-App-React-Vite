@@ -19,3 +19,21 @@ a {
   justify-content: center;
   width: 100%;
 }
+
+.app-container {
+  background-color: #14161a;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.header-wrapper {
+  padding: 0 2%;
+}
+
+.header-logo {
+  color: gold;
+  flex-grow: 1;
+  font-family: "Montserrat" !important;
+  font-weight: bold !important;
+  cursor: pointer;
+}
