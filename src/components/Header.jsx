@@ -1,13 +1,13 @@
 import AppBar from '@mui/material/AppBar'
-import { Container, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { FormControl, Select, MenuItem } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { CryptoState, currencyLibrary } from '../context/CryptoContext';
 
 const Header = () => {
 
-  const [currency, setCurrency] = useState("USD")
+  const {currency, currencyLibId, setCurrencyLibId} = CryptoState()
 
   return (
     <AppBar position="static" color="transparent">
@@ -21,12 +21,15 @@ const Header = () => {
           <div>
             <FormControl sx={{ m: 1, minWidth: 100 }}>
               <Select
-                value={currency}
-                onChange={ (event) => setCurrency(event.target.value) }
+                value={currencyLibId}
+                onChange={(e) => setCurrencyLibId(e.target.value)}
                 autoWidth
               >
-                <MenuItem value="USD">&nbsp;&nbsp;&nbsp; USD &nbsp;&nbsp;&nbsp;</MenuItem>
-                <MenuItem value="BDT">&nbsp;&nbsp;&nbsp; BDT &nbsp;&nbsp;&nbsp;</MenuItem>
+                {
+                  currencyLibrary.map(item => {
+                    return <MenuItem key={item.id} value={item.id}>&nbsp;&nbsp;&nbsp; {item.currency} &nbsp;&nbsp;&nbsp;</MenuItem>
+                  })
+                }
               </Select>
             </FormControl>
           </div>

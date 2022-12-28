@@ -17,6 +17,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import './App.css'
+import CryptoContext from './context/CryptoContext'
 
 const router = createBrowserRouter([
   {
@@ -33,10 +34,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider theme={darkTheme}>
-      <div className='app-container'>
-        <RouterProvider router={router} />
-      </div>
-    </ThemeProvider>
+    <CryptoContext>
+      <ThemeProvider theme={darkTheme}>
+        <div className='app-container'>
+          <RouterProvider router={router} />
+        </div>
+      </ThemeProvider>
+    </CryptoContext>
   </React.StrictMode>,
 )
