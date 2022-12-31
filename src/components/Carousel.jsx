@@ -31,9 +31,8 @@ const Carousel = () => {
                     src={item?.image} 
                     alt={item?.name} 
                     className="carousel-item-image"></img>
-                    <span>
-                        {item?.symbol}&nbsp;
-                        <span>
+                    <span>{item?.symbol}&nbsp;
+                        <span className={profit ? "carousel-item-span-positive" : "carousel-item-span-negative" }>
                             {profit && "+"} {item?.price_change_percentage_24h?.toFixed(2)}
                         </span>
                     </span>

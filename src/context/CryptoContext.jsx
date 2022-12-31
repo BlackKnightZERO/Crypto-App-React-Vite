@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
-import { TrendingCoinsApi } from '../config/api'
+import { TrendingCoinsApi, CoinListApi } from '../config/api'
 
 const Crypto = React.createContext()
 
@@ -39,9 +39,12 @@ export const currencyLibrary = [
 
 const CryptoContext = ({children}) => {
 
+    const [loading, setLoading] = useState(false)
     const [currencyLibId, setCurrencyLibId] = useState(3)
     const [currency, setCurrency] = useState({})
     const [trending, setTrending] = useState([])
+    const [coin, setCoin] = useState([])
+    const [search, setSearch] = useState('')
 
     const isEmpty = (obj) => {
         return JSON.stringify(obj) === '{}'
@@ -50,7 +53,7 @@ const CryptoContext = ({children}) => {
     useEffect(() => {
         const currentCurrency = currencyLibrary.filter(item => item.id === currencyLibId)
         setCurrency(currentCurrency[0])
-    },[currencyLibId])
+    }, [currencyLibId])
 
     useEffect(() => {
         const fetchTrendingCoins = async () => {
@@ -62,8 +65,20 @@ const CryptoContext = ({children}) => {
         fetchTrendingCoins()
     }, [currency])
 
+    useEffect(() => {
+        const fetchCoins = async () => {
+            setLoading(true)
+            if(!isEmpty(currency)){
+                const { data } = await axios.get(CoinListApi(currency.__currency))
+                setCoin(data)
+            }
+            setLoading(false)
+        }
+        fetchCoins()
+    }, [currency])
+
   return (
-    <Crypto.Provider value={{currency, currencyLibId, trending, setCurrencyLibId}}>
+    <Crypto.Provider value={{currency, currencyLibId, trending, coin, search, setCurrencyLibId, setSearch}}>
         {children}
     </Crypto.Provider>
   )

@@ -4,7 +4,10 @@ import App from './App'
 import ErrorPage from './error-page'
 import Coin from './pages/Coin'
 
+import CryptoContext from './context/CryptoContext'
+
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import './App.css'
 
 const darkTheme = createTheme({
   palette: {
@@ -16,8 +19,6 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import './App.css'
-import CryptoContext from './context/CryptoContext'
 
 const router = createBrowserRouter([
   {

@@ -79,7 +79,12 @@ a {
 }
 
 .carousel-item {
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #fff;
 }
 
 .carousel-item-image {
@@ -88,6 +93,25 @@ a {
 }
 
 .carousel-item-span {
-  font-size: 22;
+  font-size: 22px !important;
+  font-weight: 500 !important;
+}
+
+.carousel-item-span-positive {
+  color: #00CC99;
   font-weight: 500;
+}
+
+.carousel-item-span-negative {
+  color: #ec1919;
+}
+
+.table-header {
+  margin: 18px !important;
+  font-family: "Montserrat" !important;
+}
+
+.table-search {
+  margin-bottom: 20px;
+  width: 100%;
 }
