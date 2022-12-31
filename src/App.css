@@ -115,3 +115,27 @@ a {
   margin-bottom: 20px;
   width: 100%;
 }
+
+.linear-progress{
+  background-color: gold;
+}
+
+.table-head {
+  background-color: #EEBC1D;
+}
+
+.table-head-cell {
+  color: black !important;
+  font-weight: 700 !important;
+  font-family: "Montserrat" !important;
+}
+
+.table-body-cell {
+  display: flex;
+  gap: 15;
+}
+
+.table-cell-img {
+  height: 50px;
+  margin-bottom: 10px;
+}

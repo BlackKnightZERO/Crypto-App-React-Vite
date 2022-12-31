@@ -37,6 +37,10 @@ export const currencyLibrary = [
     },
 ]
 
+export const tableHeadList = [
+    "Coin", "Price", "24h Change", "Market Cap"
+]
+
 const CryptoContext = ({children}) => {
 
     const [loading, setLoading] = useState(false)
@@ -78,7 +82,7 @@ const CryptoContext = ({children}) => {
     }, [currency])
 
   return (
-    <Crypto.Provider value={{currency, currencyLibId, trending, coin, search, setCurrencyLibId, setSearch}}>
+    <Crypto.Provider value={{loading, currency, currencyLibId, trending, coin, search, setCurrencyLibId, setSearch}}>
         {children}
     </Crypto.Provider>
   )
