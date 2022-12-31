@@ -41,5 +41,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </div>
       </ThemeProvider>
     </CryptoContext>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

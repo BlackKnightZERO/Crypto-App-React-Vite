@@ -1,4 +1,6 @@
+import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
+import { TrendingCoinsApi } from '../config/api'
 
 const Crypto = React.createContext()
 
@@ -6,56 +8,62 @@ export const currencyLibrary = [
     {
         "id":1,
         "nation":"United States of America",
-        "currency":"USD",
+        "__currency":"usd",
         "symbol":"$"
     },
     {
         "id":2,
         "nation":"United Kingdom",
-        "currency":"GBP",
+        "__currency":"gbp",
         "symbol":"£"
     },
     {
         "id":3,
         "nation":"Bangladesh",
-        "currency":"BDT",
+        "__currency":"bdt",
         "symbol":"৳"
     },
     {
         "id":4,
         "nation":"India",
-        "currency":"INR",
+        "__currency":"inr",
         "symbol":"₹"
     },
     {
         "id":5,
         "nation":"United Arab Emirates",
-        "currency":"AED",
+        "__currency":"aed",
         "symbol":"د.إ"
     },
 ]
 
 const CryptoContext = ({children}) => {
 
-    // const [currency, setCurrency] = useState("BDT")
-    // const [symbol, setSymbol] = useState("৳")
-
-    // useEffect(() => {
-    //     currency === "BDT"
-    //     ? setSymbol("৳")
-    //     : setSymbol("$")
-    // },[currency])
-
     const [currencyLibId, setCurrencyLibId] = useState(3)
     const [currency, setCurrency] = useState({})
+    const [trending, setTrending] = useState([])
+
+    const isEmpty = (obj) => {
+        return JSON.stringify(obj) === '{}'
+    }
 
     useEffect(() => {
         const currentCurrency = currencyLibrary.filter(item => item.id === currencyLibId)
-        setCurrency(currentCurrency)
+        setCurrency(currentCurrency[0])
     },[currencyLibId])
 
+    useEffect(() => {
+        const fetchTrendingCoins = async () => {
+            if(!isEmpty(currency)){
+                const { data } = await axios.get(TrendingCoinsApi(currency.__currency))
+                setTrending(data)
+            }
+        }
+        fetchTrendingCoins()
+    }, [currency])
+
   return (
-    <Crypto.Provider value={{currency, currencyLibId, setCurrencyLibId}}>
+    <Crypto.Provider value={{currency, currencyLibId, trending, setCurrencyLibId}}>
         {children}
     </Crypto.Provider>
   )

@@ -27,7 +27,7 @@ const Header = () => {
               >
                 {
                   currencyLibrary.map(item => {
-                    return <MenuItem key={item.id} value={item.id}>&nbsp;&nbsp;&nbsp; {item.currency} &nbsp;&nbsp;&nbsp;</MenuItem>
+                    return <MenuItem key={item.id} value={item.id}>&nbsp;&nbsp;&nbsp; {item.__currency.toUpperCase()} &nbsp;&nbsp;&nbsp;</MenuItem>
                   })
                 }
               </Select>

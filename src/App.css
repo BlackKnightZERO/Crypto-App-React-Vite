@@ -37,3 +37,57 @@ a {
   font-weight: bold !important;
   cursor: pointer;
 }
+
+.banner {
+  /* background-image: url(./assets/bg.jpg); */
+  background: rgb(0,3,14);
+  background: radial-gradient(circle, rgba(0,3,14,1) 0%, rgba(2,0,35,1) 90%);
+}
+
+.banner-content {
+  height: 400;
+  display: flex;
+  flex-direction: column;
+  padding-top: 25;
+  justify-content: space-around;
+}
+
+.banner-typography-header {
+  font-weight: bold !important;
+  margin-top: 15 !important;
+  font-family: "Montserrat" !important;
+}
+
+.banner-typography-p {
+  color: darkgrey !important;
+  text-transform: capitalize !important;
+  font-family: "Montserrat" !important;
+}
+
+.tagline {
+  display: flex;
+  flex-direction: column;
+  height: 40%;
+  justify-content: center;
+  text-align: center;
+}
+
+.carousel-wrapper {
+  height: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-item {
+
+}
+
+.carousel-item-image {
+  height: 80;
+  margin-bottom: 10;
+}
+
+.carousel-item-span {
+  font-size: 22;
+  font-weight: 500;
+}
