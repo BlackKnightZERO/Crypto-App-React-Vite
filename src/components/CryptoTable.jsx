@@ -74,7 +74,7 @@ const CryptoTable = () => {
                             .map(item => {
                               let profit = item?.price_change_percentage_24h >= 0
                               return (
-                                <TableRow>
+                                <TableRow onClick={() => history.push(`/coins/${row.id}`)}>
                                   {/* <Link
                                     to={`/coins/${item.id}`}> */}
                                     <TableCell 
@@ -94,7 +94,7 @@ const CryptoTable = () => {
                                           <span style={{ color: "darkgray" }}>{ item.name }</span>
                                         </div>
                                     </TableCell>
-                                    <TableCell align="right">
+                                    <TableCell align="right" style={{ color: '#fff' }}>
                                       {symbol}{" "}
                                       {numberWithCommas(item?.current_price?.toFixed(2))}
                                     </TableCell>
@@ -108,7 +108,7 @@ const CryptoTable = () => {
                                       {profit && "+"}
                                       {item.price_change_percentage_24h.toFixed(2)}%
                                     </TableCell>
-                                    <TableCell align="right">
+                                    <TableCell align="right" align="right" style={{ color: '#fff' }}>
                                       {symbol}{" "}
                                       {numberWithCommas(
                                         item.market_cap.toString().slice(0, -6)
