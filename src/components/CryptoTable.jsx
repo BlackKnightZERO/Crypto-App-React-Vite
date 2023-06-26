@@ -3,6 +3,10 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CryptoState, tableHeadList } from '../context/CryptoContext'
 import { Link } from 'react-router-dom';
 
+export function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const darkTheme = createTheme({
     palette: {
       primary: {
@@ -14,7 +18,7 @@ const darkTheme = createTheme({
 
 const CryptoTable = () => {
 
-    const {coin, loading, search, setSearch} = CryptoState()
+  const {coin, loading, search, setSearch, symbol} = CryptoState()
 
   return (
     <>
@@ -53,7 +57,7 @@ const CryptoTable = () => {
                           <TableRow>
                             { tableHeadList.map(item => {
                               return(
-                              <TableCell 
+                              <TableCell
                                 key={item} 
                                 align={ item === "Coin" ? "" : "right" }
                                 className="table-head-cell">{item}</TableCell>
@@ -71,25 +75,53 @@ const CryptoTable = () => {
                               let profit = item?.price_change_percentage_24h >= 0
                               return (
                                 <TableRow>
-                                  <Link  
-                                    to={`/coins/${item.id}`}>
-                                  <TableCell 
-                                    conponent="th"
-                                    scope="row"
-                                    align=""
-                                    className="table-body-cell">
-                                      <img 
-                                        src={item?.image}
-                                        alt={item?.name}
-                                        className="table-cell-img"
-                                      />
-                                  </TableCell>
-                                  </Link>
+                                  {/* <Link
+                                    to={`/coins/${item.id}`}> */}
+                                    <TableCell 
+                                      conponent="th"
+                                      scope="row"
+                                      align=""
+                                      className="table-body-cell">
+                                        <img 
+                                          src={item?.image}
+                                          alt={item?.name}
+                                          className="table-cell-img"
+                                        />
+                                        <div className='flex-dir-colum'>
+                                          <span className='uppercase-22'>
+                                            { item?.symbol }
+                                          </span>
+                                          <span style={{ color: "darkgray" }}>{ item.name }</span>
+                                        </div>
+                                    </TableCell>
+                                    <TableCell align="right">
+                                      {symbol}{" "}
+                                      {numberWithCommas(item?.current_price?.toFixed(2))}
+                                    </TableCell>
+                                    <TableCell
+                                      align="right"
+                                      style={{
+                                        color: profit > 0 ? "rgb(14, 203, 129)" : "red",
+                                        fontWeight: 500,
+                                      }}
+                                    >
+                                      {profit && "+"}
+                                      {item.price_change_percentage_24h.toFixed(2)}%
+                                    </TableCell>
+                                    <TableCell align="right">
+                                      {symbol}{" "}
+                                      {numberWithCommas(
+                                        item.market_cap.toString().slice(0, -6)
+                                      )}
+                                      M
+                                    </TableCell>
+                                  {/* </Link> */}
                                 </TableRow>
                               )
                             })
                           }
                         </TableBody>
+
                       </Table>
                     )
                   }
